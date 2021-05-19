@@ -38,7 +38,7 @@ jobs:
             VERSION=${GITHUB_REF/refs\/tags\//}
           fi
           echo ::set-output name=BUILD_DATE::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
-          echo ::set-output name=VERSION::${VERSION}          
+          echo ::set-output name=VERSION::${VERSION}
       # - name: Publish multi-arch container image
       #   uses: docker/build-push-action@v2
       #   with:
@@ -60,7 +60,7 @@ jobs:
       # - name: Check images
       #   run: |
       #     docker buildx imagetools inspect docker.io/${{ env.ORG }}/${{ env.IMAGE }}:${{ steps.prep.outputs.VERSION }}
-      #     docker pull docker.io/${{ env.ORG }}/${{ env.IMAGE }}:${{ steps.prep.outputs.VERSION }}          
+      #     docker pull docker.io/${{ env.ORG }}/${{ env.IMAGE }}:${{ steps.prep.outputs.VERSION }}
       - name: Download release notes utility
         env:
           GH_REL_URL: https://github.com/buchanae/github-release-notes/releases/download/0.2.0/github-release-notes-linux-amd64-0.2.0.tar.gz
@@ -70,5 +70,6 @@ jobs:
         with:
           version: latest
           args: release --release-notes=docs/release_notes/${{ steps.prep.outputs.VERSION }}.md --skip-validate
+          workdir: ./cmd/pctl
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
