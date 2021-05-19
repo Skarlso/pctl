@@ -6,7 +6,7 @@ on:
 
 env:
   IMAGE: pctl
-  ORG: weaveworks
+  ORG: skarlso
 
 jobs:
   goreleaser:
@@ -28,7 +28,7 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
-          username: weaveworksprofilesci
+          username: skarlso
           password: ${{ secrets.DOCKERHUB_PASSWORD_WEAVEWORKSPROFILESCI }}
       - name: Publish multi-arch container image
         uses: docker/build-push-action@v2
